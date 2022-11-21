@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+    mssql01:
+        build: .
+        ports:  
+          - "14331:1433"
+        container_name: mssql01
+        env_file:
+          - mssql.env
+          - sqlcreds.env
+        volumes: 
+          - mssql01-sys:/var/opt/mssql/
+          - mssql01-data:/var/opt/sqlserver/data
+          - mssql01-log:/var/opt/sqlserver/log
+          - mssql01-backup:/var/opt/sqlserver/backup
+        restart: always
+    
+    mssql02:
+        build: .
+        ports:  
+          - "14332:1433"
+        container_name: mssql02
+        env_file:
+          - mssql.env
+          - sqlcreds.env
+        volumes: 
+          - mssql02-sys:/var/opt/mssql/
+          - mssql02-data:/var/opt/sqlserver/data
+          - mssql02-log:/var/opt/sqlserver/log
+          - mssql02-backup:/var/opt/sqlserver/backup
+        restart: always
+volumes:
+  mssql01-sys:
+  mssql01-data:
+  mssql01-log:
+  mssql01-backup:
+  mssql02-sys:
+  mssql02-data:
+  mssql02-log:
+  mssql02-backup:
+  
